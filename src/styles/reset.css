@@ -1,0 +1,41 @@
+@reset-global pc;
+
+html, body, main {
+  size: 100%;
+  color: #fff;
+  font-size: 16px;
+  font-family: -apple-system, 
+    "Helvetica Neue", Arial, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei",
+    "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC",
+    "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC",
+    "WenQuanYi Micro Hei", SimSun, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: radial-gradient(ellipse at bottom, #1c2837 0%, #050608 100%);
+  background-attachment: fixed;
+}
+
+a {
+  cursor: pointer;
+}
+
+@component-namespace sky {
+  @c title {
+    margin: 0;
+    padding-bottom: 30px;
+    color: rgba(255, 255, 255, .3);
+    font-size: 26px;
+    letter-spacing: .2em;
+    &::after {
+      content: "";
+      size: 10% 2px;
+      margin-top: 30px;
+      background-color: rgba(255, 255, 255, .3);
+      display: block;
+    }
+    & > em {
+      color: #fff;
+      font-style: normal;
+    }
+  }
+}
