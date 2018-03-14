@@ -1,4 +1,9 @@
 {
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ],
   "presets": [
     [ "env", {
       "targets": {
@@ -9,9 +14,5 @@
         ]
       }
     }]
-  ],
-  "plugins": [
-    ["transform-react-jsx", { "pragma": "Snabbdom.createElement" }],
-    ["transform-object-rest-spread"]
   ]
 }

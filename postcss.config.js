@@ -2,9 +2,9 @@ module.exports = {
   plugins: {
     'postcss-salad': {
       browsers: [
-        '> 1%',
-        'last 2 versions',
-        'not ie <= 8'
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
       ],
       features: {
         bem: {
