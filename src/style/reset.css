@@ -1,0 +1,16 @@
+@reset-global pc;
+
+html, body, #app {
+  size: 100%;
+  overflow: hidden;
+}
+
+a {
+  cursor: pointer;
+}
+
+@component-namespace hexo {
+  @c main {
+    height: 100%;
+  }
+}

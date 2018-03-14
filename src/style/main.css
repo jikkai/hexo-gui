@@ -1,1 +1,2 @@
-@reset-global pc;
+@import "./reset";
+@import "iview/dist/styles/iview";
