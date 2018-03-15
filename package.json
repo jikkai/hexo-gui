@@ -25,6 +25,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
+    "date-fns": "^1.29.0",
     "iview": "^2.11.0",
     "rxjs": "^5.5.7",
     "vue": "^2.5.16",
