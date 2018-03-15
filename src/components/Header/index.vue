@@ -2,7 +2,7 @@
   <header class="hexo-header">
     <router-link class="hexo-header__logo" to="/">
       <img src="../../assets/logo.svg" :draggable="false" />
-      <h1>HEXO ENCORE</h1>
+      <h1>HEXO GUI</h1>
     </router-link>
   </header>
 </template>

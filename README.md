@@ -1,1 +1,1 @@
-# Hexo Encore
+# Hexo GUI

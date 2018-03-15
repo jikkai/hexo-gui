@@ -1,4 +1,4 @@
 module.exports = {
   port: '4001',
-  title: 'Hexo Encore'
+  title: 'Hexo GUI'
 }

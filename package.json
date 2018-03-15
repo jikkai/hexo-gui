@@ -1,17 +1,17 @@
 {
-  "name": "hexo-encore",
+  "name": "hexo-gui",
   "version": "0.0.1",
   "description": "An admin plugin for hexo",
   "main": "index.js",
   "scripts": {
     "prebuild": "rimraf release",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "start": "nodemon bin/start.js",
     "build": "node bin/build.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jikkai/hexo-encore.git"
+    "url": "git+https://github.com/jikkai/hexo-gui.git"
   },
   "keywords": [
     "hexo",
@@ -20,9 +20,9 @@
   "author": "Jikkai Xiao <sonne@asaki.me>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jikkai/hexo-encore/issues"
+    "url": "https://github.com/jikkai/hexo-gui/issues"
   },
-  "homepage": "https://github.com/jikkai/hexo-encore#readme",
+  "homepage": "https://github.com/jikkai/hexo-gui#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
