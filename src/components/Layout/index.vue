@@ -2,8 +2,8 @@
   <section class="hexo-container">
     <hexo-header />
     <section class="hexo-content">
-      <hexo-list />
-      <router-view />
+      <hexo-list :posts="posts" />
+      <router-view :posts="posts" />
     </section>
   </section>
 </template>
@@ -18,6 +18,9 @@
     components: {
       [Header.name]: Header,
       [List.name]: List
+    },
+    props: {
+      posts: Array
     }
   })
   export default class HexoLayout extends Vue {}

@@ -9,6 +9,7 @@ api.create = (hexo, app) => {
 
     app.use(root + path, (req, res) => {
       res.done = (val) => {
+        res.setHeader('Access-Control-Allow-Origin', '*')
         res.setHeader('Content-type', 'application/json')
         res.end(JSON.stringify(val, (key, value) => {
           if (key === 'tags' || key === 'categories') {

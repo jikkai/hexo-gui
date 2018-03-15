@@ -1,6 +1,6 @@
 <template>
   <ul class="hexo-list">
-    list
+    {{posts}}
   </ul>
 </template>
 
@@ -8,7 +8,11 @@
   import Vue from 'vue'
   import Component from 'vue-class-component'
 
-  @Component
+  @Component({
+    props: {
+      posts: Array
+    }
+  })
   export default class HexoList extends Vue {
   }
 </script>

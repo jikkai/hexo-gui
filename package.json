@@ -23,9 +23,13 @@
   },
   "homepage": "https://github.com/jikkai/hexo-encore#readme",
   "dependencies": {
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
     "iview": "^2.11.0",
+    "rxjs": "^5.5.7",
     "vue": "^2.5.16",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-rx": "^5.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

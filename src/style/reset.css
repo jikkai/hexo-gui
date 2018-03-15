@@ -10,7 +10,17 @@ a {
 }
 
 @component-namespace hexo {
-  @c main {
+  @c container {
     height: 100%;
+  }
+
+  @c content {
+    height: calc(100% - 64px);
+    display: flex;
+  }
+
+  @c main {
+    size: calc(100% - 240px) 100%;
+    overflow: auto;
   }
 }
