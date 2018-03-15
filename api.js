@@ -1,14 +1,17 @@
+const fs = require('fs')
+
 const api = {}
 
 api.create = (hexo, app) => {
   // ==========================================
   // 创建 api 路由
   // ==========================================
-  function createRouter (path, cb) {
+  function createRouter (name, cb) {
     const root = `${hexo.config.root}admin/api`
 
-    app.use(root + path, (req, res) => {
+    app.use(root + name, (req, res) => {
       res.done = (val) => {
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
         res.setHeader('Access-Control-Allow-Origin', '*')
         res.setHeader('Content-type', 'application/json')
         res.end(JSON.stringify(val, (key, value) => {
@@ -29,6 +32,14 @@ api.create = (hexo, app) => {
   createRouter('/posts/list', (req, res) => {
     const post = hexo.model('Post')
     res.done(post.toArray())
+  })
+
+  createRouter('/posts/update', (req, res) => {
+    if (req.method === 'POST') {
+      const { source, raw } = req.body
+      console.log(fs.writeFileSync(source, raw))
+    }
+    res.done({})
   })
 }
 

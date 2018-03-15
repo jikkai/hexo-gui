@@ -1,24 +1,25 @@
 <template>
   <section class="hexo-editor">
-    <textarea class="hexo-editor__content">{{content.raw}}</textarea>
+    <textarea
+      class="hexo-editor__content"
+      v-model="content.raw"
+      @input="$emit('change', content)"
+    />
     <hexo-editor-toolbar />
   </section>
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Component from 'vue-class-component'
   import EditorToolbar from './toolbar'
 
-  @Component({
+  export default {
+    name: 'hexo-editor',
     props: {
       content: Object
     },
     components: {
       [EditorToolbar.name]: EditorToolbar
     }
-  })
-  export default class HexoEditor extends Vue {
   }
 </script>
 

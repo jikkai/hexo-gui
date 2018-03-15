@@ -14,21 +14,16 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Component from 'vue-class-component'
-
-  @Component({
+  export default {
+    name: 'hexo-menu',
     props: {
       activedId: String,
       menus: Array
-    }
-  })
-  export default class HexoMenu extends Vue {
-    // ===================================
-    // Methods
-    // ===================================
-    change (id) {
-      this.$emit('change', id)
+    },
+    methods: {
+      change (id) {
+        this.$emit('change', id)
+      }
     }
   }
 </script>

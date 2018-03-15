@@ -8,11 +8,8 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Component from 'vue-class-component'
-
-  @Component
-  export default class HexoHeader extends Vue {
+  export default {
+    name: 'hexo-header'
   }
 </script>
 

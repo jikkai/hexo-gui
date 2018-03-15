@@ -7,6 +7,9 @@ const axios = Axios.create({
 const api = {
   getPosts () {
     return axios.get('/posts/list')
+  },
+  updatePost (source, raw) {
+    return axios.post('/posts/update', { source, raw })
   }
 }
 

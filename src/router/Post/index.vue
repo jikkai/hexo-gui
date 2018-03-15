@@ -2,31 +2,25 @@
   <section class="hexo-container">
     <hexo-header />
     <section class="hexo-content">
-      <hexo-menu :menus="menus" :activedId="activedId" @change="handleChange" />
-      <hexo-editor class="hexo-main" :content="activedPost" />
+      <hexo-menu :menus="menus" :activedId="activedId" @change="handleMenuChange" />
+      <hexo-editor class="hexo-main" :content="activedPost" @change="handleContentChange" />
     </section>
   </section>
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Component from 'vue-class-component'
   import Header from '~components/Header'
   import Menu from '~components/Menu'
   import Editor from '~components/Editor'
 
-  @Component({
-    components: {
-      [Header.name]: Header,
-      [Menu.name]: Menu,
-      [Editor.name]: Editor
-    }
-  })
-  export default class HomeRoute extends Vue {
-    posts = []
-    activedId = ''
-    menus = []
-
+  export default {
+    data () {
+      return {
+        posts: [],
+        activedId: '',
+        menus: []
+      }
+    },
     async created () {
       const resp = await this.$api.getPosts()
       this.posts = resp.data.sort((a, b) => this.$date.compare(a.date, b.date))
@@ -36,17 +30,24 @@
         const { title, date, _id } = post
         return { title, date, _id }
       })
-    }
-
-    // ===================================
-    // Methods
-    // ===================================
-    handleChange (id) {
-      this.activedId = id
-    }
-
-    get activedPost () {
-      return this.posts.find(post => post._id === this.activedId) || {}
+    },
+    methods: {
+      handleMenuChange (id) {
+        this.activedId = id
+      },
+      async handleContentChange (content) {
+        await this.$api.updatePost(content.full_source, content.raw)
+      }
+    },
+    components: {
+      [Header.name]: Header,
+      [Menu.name]: Menu,
+      [Editor.name]: Editor
+    },
+    computed: {
+      activedPost () {
+        return this.posts.find(post => post._id === this.activedId) || {}
+      }
     }
   }
 </script>

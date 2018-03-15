@@ -14,7 +14,6 @@ module.exports = {
   plugins: [
     'html'
   ],
-  "parser": "babel-eslint",
   'rules': {
     'arrow-parens': 0,
     'generator-star-spacing': 0,
