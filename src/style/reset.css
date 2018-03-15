@@ -20,7 +20,7 @@ a {
   }
 
   @c main {
-    size: calc(100% - 240px) 100%;
+    size: calc(100% - 280px) 100%;
     overflow: auto;
   }
 }

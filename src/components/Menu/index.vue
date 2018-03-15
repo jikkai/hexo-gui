@@ -36,13 +36,12 @@
 <style>
   @component-namespace hexo {
     @c menu {
-      width: 240px;
+      width: 280px;
       color: #ffffffb3 #495060;
       overflow: auto;
 
       @d item {
-        height: 72px;
-        padding: 8px 12px;
+        padding: 10px 12px;
         box-sizing: border-box;
         cursor: pointer;
         transition: all .2s;
@@ -58,16 +57,13 @@
         }
 
         & h5 {
-          margin-bottom: 4px;
+          margin-bottom: 8px;
           font-size: 14px;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
         }
 
         & time {
           text-align: right;
-          color: #ffffffcc;
+          color: #ffffff88;
           display: block;
         }
       }

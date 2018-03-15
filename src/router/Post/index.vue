@@ -3,10 +3,7 @@
     <hexo-header />
     <section class="hexo-content">
       <hexo-menu :menus="menus" :activedId="activedId" @change="handleChange" />
-      <main class="hexo-main">
-        <h2>{{activedPost.title}}</h2>
-        <section v-html="activedPost.raw"></section>
-      </main>
+      <hexo-editor class="hexo-main" :content="activedPost" />
     </section>
   </section>
 </template>
@@ -16,11 +13,13 @@
   import Component from 'vue-class-component'
   import Header from '~components/Header'
   import Menu from '~components/Menu'
+  import Editor from '~components/Editor'
 
   @Component({
     components: {
       [Header.name]: Header,
-      [Menu.name]: Menu
+      [Menu.name]: Menu,
+      [Editor.name]: Editor
     }
   })
   export default class HomeRoute extends Vue {
@@ -30,7 +29,7 @@
 
     async created () {
       const resp = await this.$api.getPosts()
-      this.posts = resp.data
+      this.posts = resp.data.sort((a, b) => this.$date.compare(a.date, b.date))
 
       this.activedId = this.posts[0]._id
       this.menus = this.posts.map(post => {

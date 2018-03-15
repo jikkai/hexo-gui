@@ -37,7 +37,7 @@
       display: flex;
 
       & main {
-        width: calc(100% - 240px);
+        width: calc(100% - 280px);
       }
     }
   }
