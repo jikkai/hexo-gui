@@ -10,6 +10,13 @@ const api = {
   },
   updatePost (source, raw) {
     return axios.post('/posts/update', { source, raw })
+  },
+  addPost (title) {
+    return axios.post('/posts/add', { title })
+  },
+  removePost (source) {
+    console.log(source)
+    return axios.post('/posts/remove', { source })
   }
 }
 

@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 
 const api = {}
 
@@ -37,7 +37,23 @@ api.create = (hexo, app) => {
   createRouter('/posts/update', (req, res) => {
     if (req.method === 'POST') {
       const { source, raw } = req.body
-      console.log(fs.writeFileSync(source, raw))
+      fs.writeFileSync(source, raw)
+    }
+    res.done({})
+  })
+
+  createRouter('/posts/add', async (req, res) => {
+    if (req.method === 'POST') {
+      const { title } = req.body
+      await hexo.post.create(Object.assign({ title }, hexo.config.metadata))
+    }
+    res.done({})
+  })
+
+  createRouter('/posts/remove', (req, res) => {
+    if (req.method === 'POST') {
+      const { source } = req.body
+      fs.removeSync(source)
     }
     res.done({})
   })

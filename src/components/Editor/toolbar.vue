@@ -1,13 +1,24 @@
 <template>
   <section class="hexo-editor-toolbar">
-    <a class="hexo-editor-toolbar__item" @click="$Message.info('新增文章')">
-      <Icon type="plus-circled" />
+    <a @click="$emit('save')">
+      <Tooltip class="hexo-editor-toolbar__item" content="保存" placement="left">
+        <Icon type="upload" />
+      </Tooltip>
     </a>
-    <a class="hexo-editor-toolbar__item" @click="$Message.info('文章信息')">
-      <Icon type="information-circled" />
+    <a @click="$emit('add')">
+      <Tooltip class="hexo-editor-toolbar__item" content="新建" placement="left">
+        <Icon type="compose" />
+      </Tooltip>
     </a>
-    <a class="hexo-editor-toolbar__item" @click="$Message.info('删除文章')">
-      <Icon type="trash-a" />
+    <a @click="$Message.info('文章信息')">
+      <Tooltip class="hexo-editor-toolbar__item" content="信息" placement="left">
+        <Icon type="information-circled" />
+      </Tooltip>
+    </a>
+    <a @click="$emit('remove')">
+      <Tooltip class="hexo-editor-toolbar__item" content="删除" placement="left">
+        <Icon type="trash-a" />
+      </Tooltip>
     </a>
   </section>
 </template>

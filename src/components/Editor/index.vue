@@ -3,9 +3,12 @@
     <textarea
       class="hexo-editor__content"
       v-model="content.raw"
-      @input="$emit('change', content)"
     />
-    <hexo-editor-toolbar />
+    <hexo-editor-toolbar
+      @save="$emit('save', content)"
+      @add="handleAdd"
+      @remove="handleRemove"
+    />
   </section>
 </template>
 
@@ -14,8 +17,48 @@
 
   export default {
     name: 'hexo-editor',
+    data () {
+      return {
+        title: ''
+      }
+    },
     props: {
       content: Object
+    },
+    methods: {
+      handleAdd () {
+        this.$Modal.confirm({
+          render: h => {
+            return h('Input', {
+              props: {
+                value: this.title,
+                autofocus: true,
+                placeholder: '请输入文章标题'
+              },
+              on: {
+                input: (val) => {
+                  this.title = val
+                }
+              }
+            })
+          },
+          onOk: () => {
+            if (this.title) this.$emit('add', this.title)
+          },
+          onCancel: () => {
+            this.title = ''
+          }
+        })
+      },
+      handleRemove () {
+        this.$Modal.confirm({
+          title: '删除确认',
+          content: '是否确认删除该文章？',
+          onOk: () => {
+            this.$emit('remove', this.content)
+          }
+        })
+      }
     },
     components: {
       [EditorToolbar.name]: EditorToolbar

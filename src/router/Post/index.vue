@@ -3,7 +3,13 @@
     <hexo-header />
     <section class="hexo-content">
       <hexo-menu :menus="menus" :activedId="activedId" @change="handleMenuChange" />
-      <hexo-editor class="hexo-main" :content="activedPost" @change="handleContentChange" />
+      <hexo-editor
+        class="hexo-main"
+        :content="activedPost"
+        @save="handleSave"
+        @add="handleAdd"
+        @remove="handleRemove"
+      />
     </section>
   </section>
 </template>
@@ -35,8 +41,19 @@
       handleMenuChange (id) {
         this.activedId = id
       },
-      async handleContentChange (content) {
+      async handleAdd (title) {
+        await this.$api.addPost(title)
+        this.$Message.success('新建成功')
+        location.reload()
+      },
+      async handleSave (content) {
         await this.$api.updatePost(content.full_source, content.raw)
+        this.$Message.success('保存成功')
+      },
+      async handleRemove (content) {
+        await this.$api.removePost(content.full_source)
+        this.$Message.success('删除成功')
+        location.reload()
       }
     },
     components: {
