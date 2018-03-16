@@ -1,11 +1,11 @@
 {
   "name": "hexo-gui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An admin plugin for hexo",
   "main": "index.js",
   "scripts": {
     "prebuild": "rimraf release",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm i && npm run build",
     "start": "nodemon bin/start.js",
     "build": "node bin/build.js"
   },
