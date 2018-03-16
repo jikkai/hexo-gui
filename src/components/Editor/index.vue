@@ -5,6 +5,7 @@
       v-model="content.raw"
     />
     <hexo-editor-toolbar
+      :content="content"
       @save="$emit('save', content)"
       @add="handleAdd"
       @remove="handleRemove"

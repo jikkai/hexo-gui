@@ -14,6 +14,10 @@
 </script>
 
 <style>
+  @font-face {
+    font-family: "BEYNO";
+    src: url("../../assets/BEYNO.ttf");
+  }
   @component-namespace hexo {
     @c header {
       height: 64px;
@@ -30,8 +34,10 @@
           size: 42px;
         }
         & h1 {
+          margin-left: 4px;
           color: #fff;
-          font-size: 16px;
+          font-family: "BEYNO" cursive;
+          font-size: 18px;
         }
       }
     }

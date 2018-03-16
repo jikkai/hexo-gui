@@ -1,22 +1,27 @@
 <template>
   <section class="hexo-editor-toolbar">
-    <a @click="$emit('save')">
-      <Tooltip class="hexo-editor-toolbar__item" content="保存" placement="left">
+    <a class="hexo-editor-toolbar__item" @click="$emit('save')">
+      <Tooltip content="保存" placement="left">
         <Icon type="upload" />
       </Tooltip>
     </a>
-    <a @click="$emit('add')">
-      <Tooltip class="hexo-editor-toolbar__item" content="新建" placement="left">
+    <a class="hexo-editor-toolbar__item" @click="$emit('add')">
+      <Tooltip content="新建" placement="left">
         <Icon type="compose" />
       </Tooltip>
     </a>
-    <a @click="$Message.info('文章信息')">
-      <Tooltip class="hexo-editor-toolbar__item" content="信息" placement="left">
-        <Icon type="information-circled" />
-      </Tooltip>
+    <a class="hexo-editor-toolbar__item">
+      <Poptip title="文章信息" placement="left">
+        <Tooltip content="信息" placement="left">
+          <Icon type="information-circled" />
+        </Tooltip>
+        <div slot="content">
+          12313123
+        </div>
+      </Poptip>
     </a>
-    <a @click="$emit('remove')">
-      <Tooltip class="hexo-editor-toolbar__item" content="删除" placement="left">
+    <a class="hexo-editor-toolbar__item" @click="$emit('remove')">
+      <Tooltip content="删除" placement="left">
         <Icon type="trash-a" />
       </Tooltip>
     </a>
@@ -25,7 +30,10 @@
 
 <script>
   export default {
-    name: 'hexo-editor-toolbar'
+    name: 'hexo-editor-toolbar',
+    props: {
+      content: Object
+    }
   }
 </script>
 
@@ -41,9 +49,11 @@
       @d item {
         height: 50px;
         color: inherit;
-        line-height: 50px;
-        text-align: center;
-        display: block;
+        /* line-height: 50px;
+        text-align: center; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }
