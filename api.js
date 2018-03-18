@@ -1,3 +1,4 @@
+const { exec } = require('child_process')
 const fs = require('fs-extra')
 
 const api = {}
@@ -46,6 +47,14 @@ api.create = (hexo, app) => {
     if (req.method === 'POST') {
       const { title } = req.body
       await hexo.post.create(Object.assign({ title }, hexo.config.metadata))
+    }
+    res.done({})
+  })
+
+  createRouter('/posts/open/asset', async (req, res) => {
+    if (req.method === 'POST') {
+      const { source } = req.body
+      exec(`open ${source}`)
     }
     res.done({})
   })

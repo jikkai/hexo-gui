@@ -14,6 +14,9 @@ const api = {
   addPost (title) {
     return axios.post('/posts/add', { title })
   },
+  openPostAsset (source) {
+    return axios.post('/posts/open/asset', { source })
+  },
   removePost (source) {
     console.log(source)
     return axios.post('/posts/remove', { source })

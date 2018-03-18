@@ -8,6 +8,7 @@
       :content="content"
       @save="$emit('save', content)"
       @add="handleAdd"
+      @open="$emit('open', content)"
       @remove="handleRemove"
     />
   </section>
@@ -20,6 +21,7 @@
     name: 'hexo-editor',
     data () {
       return {
+        editor: null,
         title: ''
       }
     },
@@ -72,7 +74,7 @@
     @c editor {
       position: relative;
       size: 100%;
-      display: flex;
+      box-sizing: border-box;
 
       @d content {
         size: 100%;

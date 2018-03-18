@@ -16,7 +16,7 @@
           <Icon type="information-circled" />
         </Tooltip>
         <div class="hexo-editor-toolbar__meta" slot="content">
-          <a target="_blank" :href="meta.path">
+          <a target="_blank" :href="`http://localhost:4000${meta.path}`">
             <Icon type="link" />
             文章链接
           </a>
@@ -26,6 +26,11 @@
           <p>创建时间：{{$date.format(meta.date)}}</p>
         </div>
       </Poptip>
+    </a>
+    <a class="hexo-editor-toolbar__item" @click="$emit('open')">
+      <Tooltip content="资源" placement="left">
+        <Icon type="folder" />
+      </Tooltip>
     </a>
     <a class="hexo-editor-toolbar__item" @click="$emit('remove')">
       <Tooltip content="删除" placement="left">
@@ -49,8 +54,8 @@
         // 统计段落数
         const phase = content.split('<p>').length - 1
         // 统计字数
-        const count = Array.from(_content.split(''), str => escape(str).length)
-          .reduce((a, b) =>b.length > 4 ? a + 2 : a + 1)
+        const words = Array.from(_content.split(''), str => escape(str).length)
+        const count = words.length > 0 ? words.reduce((a, b) =>b.length > 4 ? a + 2 : a + 1) : 0
 
         return { updated, date, phase, count, path }
       }

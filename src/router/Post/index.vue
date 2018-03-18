@@ -8,6 +8,7 @@
         :content="activedPost"
         @save="handleSave"
         @add="handleAdd"
+        @open="handleOpen"
         @remove="handleRemove"
       />
     </section>
@@ -49,6 +50,9 @@
       async handleSave (content) {
         await this.$api.updatePost(content.full_source, content.raw)
         this.$Message.success('保存成功')
+      },
+      async handleOpen (content) {
+        await this.$api.openPostAsset(content.asset_dir)
       },
       async handleRemove (content) {
         await this.$api.removePost(content.full_source)
