@@ -16,7 +16,7 @@
           <Icon type="information-circled" />
         </Tooltip>
         <div class="hexo-editor-toolbar__meta" slot="content">
-          <a target="_blank" :href="`http://localhost:4000${meta.path}`">
+          <a target="_blank" :href="`http://localhost:4000/${meta.path}`">
             <Icon type="link" />
             文章链接
           </a>
