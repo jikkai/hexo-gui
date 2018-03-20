@@ -1,8 +1,7 @@
 <template>
   <section class="hexo-editor">
-    <textarea
-      class="hexo-editor__content"
-      v-model="content.raw"
+    <hexo-editor-content
+      :content.sync="content"
     />
     <hexo-editor-toolbar
       :content="content"
@@ -15,6 +14,7 @@
 </template>
 
 <script>
+  import EditorContent from './content'
   import EditorToolbar from './toolbar'
 
   export default {
@@ -64,6 +64,7 @@
       }
     },
     components: {
+      [EditorContent.name]: EditorContent,
       [EditorToolbar.name]: EditorToolbar
     }
   }
@@ -75,17 +76,6 @@
       position: relative;
       size: 100%;
       box-sizing: border-box;
-
-      @d content {
-        size: 100%;
-        padding: 12px 74px 12px 24px;
-        font-size: 14px 2;
-        background: inherit;
-        border: none;
-        box-sizing: border-box;
-        display: block;
-        resize: none;
-      }
     }
   }
 </style>
