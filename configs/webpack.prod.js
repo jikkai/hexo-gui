@@ -8,10 +8,7 @@ base.mode = 'production'
 base.output.filename = '[name].[chunkhash:8].js'
 base.stats = { children: false }
 base.optimization = {
-  minimize: true,
-  // splitChunks: {
-  //   chunks: 'all'
-  // }
+  runtimeChunk: true
 }
 
 // Plugins Configuration

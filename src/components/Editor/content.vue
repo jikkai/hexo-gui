@@ -52,8 +52,8 @@
           }) : ''
 
           let _categories = categories.length > 1 ? `[${categories.reduce((a, b) => {
-              return `${a}, ${b}`
-            })}]` : categories.length === 1 ? categories[0] : ''
+            return `${a}, ${b}`
+          })}]` : categories.length === 1 ? categories[0] : ''
 
           const raw = `---\ntitle: ${title}\ndate: ${date}\ntags: [${_tags}]\ncategories: ${_categories}\n---\n${_content}`
           const content = Object.assign(this.content, {
@@ -96,6 +96,7 @@
 
         & textarea {
           size: 100%;
+          min-height: 100% !important;
           margin-bottom: 12px;
           font-size: 14px 2;
           background: inherit;

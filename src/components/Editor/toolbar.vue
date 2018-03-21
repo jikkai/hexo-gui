@@ -55,7 +55,7 @@
         const phase = content.split('<p>').length - 1
         // 统计字数
         const words = Array.from(_content.split(''), str => escape(str).length)
-        const count = words.length > 0 ? words.reduce((a, b) =>b.length > 4 ? a + 2 : a + 1) : 0
+        const count = words.length > 0 ? words.reduce((a, b) => b.length > 4 ? a + 2 : a + 1) : 0
 
         return { updated, date, phase, count, path }
       }
