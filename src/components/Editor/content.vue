@@ -53,7 +53,7 @@
 
           let _categories = categories.length > 1 ? `[${categories.reduce((a, b) => {
               return `${a}, ${b}`
-            })}]` : categories === 1 ? categories[0] : ''
+            })}]` : categories.length === 1 ? categories[0] : ''
 
           const raw = `---\ntitle: ${title}\ndate: ${date}\ntags: [${_tags}]\ncategories: ${_categories}\n---\n${_content}`
           const content = Object.assign(this.content, {
