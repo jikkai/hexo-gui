@@ -1,5 +1,3 @@
-@reset-global pc;
-
 html, body, #app {
   size: 100%;
   overflow: hidden;
