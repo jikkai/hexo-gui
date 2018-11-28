@@ -1,0 +1,82 @@
+{
+  "name": "hexo-gui",
+  "version": "1.0.0",
+  "description": "An admin plugin for hexo",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf ./public",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./configs/webpack.dev.js",
+    "build": "npm run clean && cross-env NODE_ENV=production webpack --config ./configs/webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jikkai/hexo-gui.git"
+  },
+  "keywords": [
+    "hexo",
+    "admin"
+  ],
+  "author": "Jikkai Xiao <sonne@asaki.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jikkai/hexo-gui/issues"
+  },
+  "homepage": "https://github.com/jikkai/hexo-gui#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "antd": "^3.10.9",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "fs-extra": "^7.0.1",
+    "mobx": "^5.6.0",
+    "mobx-react": "^5.4.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-loadable": "^5.5.0",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-react-jsx": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "autoprefixer": "^9.3.1",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-import": "^1.11.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^1.0.1",
+    "cssnano": "^4.1.7",
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-react": "^7.0.2",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-html": "^5.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "file-loader": "^2.0.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-webpack-plugin": "^3.2.0",
+    "json-loader": "^0.5.7",
+    "mini-css-extract-plugin": "^0.4.5",
+    "node-sass": "^4.10.0",
+    "postcss-loader": "^3.0.0",
+    "progress-bar-webpack-plugin": "^1.11.0",
+    "react-hot-loader": "^4.3.12",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^7.1.0",
+    "sass-resources-loader": "^2.0.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.26.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.4"
+  }
+}

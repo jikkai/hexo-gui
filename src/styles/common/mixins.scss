@@ -1,0 +1,55 @@
+$namespace: 'gsr-';
+$elementSeparator: '__';
+$modifierSeparator: '--';
+$state-prefix: 'is-';
+
+@mixin block($element) {
+  .#{$namespace + $element} {
+    @content;
+  }
+}
+
+@mixin element($element) {
+  &#{$elementSeparator + $element} {
+    @content;
+  }
+}
+
+@mixin modifier($modifier) {
+  @at-root {
+    $oldest_ancestor: nth(&, 1);
+    $parent: nth($oldest_ancestor, length($oldest_ancestor));
+    #{$parent+$modifierSeparator + $modifier} {
+      @extend #{$parent};
+    }
+    #{&}#{$modifierSeparator + $modifier} {
+      @content;
+    }
+  }
+}
+
+@mixin b($element) {
+  @include block($element)  {
+    @content;
+  }
+}
+
+@mixin e($element) {
+  @include element($element)  {
+    @content;
+  }
+}
+
+@mixin m($modifier) {
+  @include modifier($modifier) {
+    @content;
+  }
+}
+
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
