@@ -1,15 +1,14 @@
 .git
-bin
-configs
 node_modules
 public
 src
 
-.babelrc
-.eslintignore
-.eslint.js
+.browserlistrc
+.editorconfig
+.eslintrc.js
 .gitignore
-nodemon.json
+babel.config.js
 postcss.config.js
 .DS_Store
+vue.config.js
 *.log

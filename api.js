@@ -31,8 +31,10 @@ api.create = (hexo, app) => {
   }
 
   createRouter('/posts/list', (req, res) => {
-    const post = hexo.model('Post')
-    res.done(post.toArray())
+    res.done({
+      posts: hexo.model('Post').find({ published: true }).toArray(),
+      drafts: hexo.model('Post').find({ published: false }).toArray()
+    })
   })
 
   createRouter('/posts/update', (req, res) => {
