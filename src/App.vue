@@ -1,9 +1,9 @@
 <template>
   <div class="layout">
-    <hg-header />
+    <Header />
 
     <section class="container">
-      <hg-sidebar :default-index="defaultIndex" />
+      <Sidebar :default-index="defaultIndex" />
 
       <main class="main">
         <router-view />
@@ -24,8 +24,8 @@ export default {
   },
 
   components: {
-    [Header.name]: Header,
-    [Sidebar.name]: Sidebar
+    Header,
+    Sidebar
   }
 }
 </script>

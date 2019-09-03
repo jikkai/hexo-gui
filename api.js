@@ -1,9 +1,12 @@
 const { exec } = require('child_process')
 const fs = require('fs-extra')
+const moment = require('moment')
 
 const api = {}
 
 api.create = (hexo, app) => {
+  hexo.browsersync.exit()
+
   // ==========================================
   // 创建 api 路由
   // ==========================================
@@ -30,10 +33,10 @@ api.create = (hexo, app) => {
     })
   }
 
-  createRouter('/posts/list', (req, res) => {
+  createRouter('/posts/list', (_, res) => {
     res.done({
-      posts: hexo.model('Post').find({ published: true }).toArray(),
-      drafts: hexo.model('Post').find({ published: false }).toArray()
+      posts: hexo.model('Post').find({ published: true }).toArray().sort((a, b) => b.date - a.date),
+      drafts: hexo.model('Post').find({ published: false }).toArray().sort((a, b) => b.date - a.date)
     })
   })
 
@@ -46,11 +49,15 @@ api.create = (hexo, app) => {
   })
 
   createRouter('/posts/add', async (req, res) => {
+    let post
     if (req.method === 'POST') {
       const { title } = req.body
-      await hexo.post.create(Object.assign({ title }, hexo.config.metadata))
+      post = await hexo.post.create(Object.assign({
+        title,
+        date: moment().format('YYYY-MM-DD HH:mm:ss')
+      }, hexo.config.metadata))
     }
-    res.done({})
+    res.done(post)
   })
 
   createRouter('/posts/open/asset', async (req, res) => {
@@ -67,6 +74,10 @@ api.create = (hexo, app) => {
       fs.removeSync(source)
     }
     res.done({})
+  })
+
+  createRouter('/configs', (req, res) => {
+    res.done(hexo.config)
   })
 }
 

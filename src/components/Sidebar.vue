@@ -15,7 +15,6 @@
 
 <script>
 export default {
-  name: 'hg-sidebar',
   props: {
     defaultIndex: String
   }

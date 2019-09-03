@@ -1,48 +1,51 @@
 <template>
   <section class="posts">
-    <vs-row>
-      <vs-col vs-w="3">
-        <vs-card>
-          <vs-list>
-            <vs-list-header title="Drafts" />
-            <vs-list-item
-              v-for="item in list.drafts"
-              :key="item._id"
-              :title="item.title"
-              @click.native="setActivePost(item)"
-            />
+    <section class="tool">
+      <vs-button @click="handleAdd">ADD</vs-button>
+      <div>
+        <vs-button v-if="activePost._id" color="danger" @click="handleRemove">DELETE</vs-button>
+        <vs-button @click="handleSave">SAVE</vs-button>
+      </div>
+    </section>
 
-            <vs-list-header title="Posts" color="success" />
-            <vs-list-item
-              v-for="item in list.posts"
-              :key="item._id"
-              :title="item.title"
-              @click.native="setActivePost(item)"
-            />
-          </vs-list>
-        </vs-card>
-      </vs-col>
+    <section class="container">
+      <vs-card class="list">
+        <vs-list>
+          <vs-list-header title="Drafts" />
+          <vs-list-item
+            v-for="item in list.drafts"
+            :key="item._id"
+            :title="item.title"
+            :subtitle="$date.format(item.date)"
+            @click.native="setActivePost(item)"
+          />
 
-      <vs-col vs-offset="1" vs-w="8">
-        <vs-card>
-          <div ref="editor" />
-        </vs-card>
-      </vs-col>
-    </vs-row>
+          <vs-list-header title="Posts" color="success" />
+          <vs-list-item
+            v-for="item in list.posts"
+            :key="item._id"
+            :title="item.title"
+            :subtitle="$date.format(item.date)"
+            @click.native="setActivePost(item)"
+          />
+        </vs-list>
+      </vs-card>
+
+      <Editor v-model="activePost" />
+    </section>
   </section>
 </template>
 
 <script>
-  import Editor from 'tui-editor'
-  import 'codemirror/lib/codemirror.css'
-  import 'tui-editor/dist/tui-editor.css'
-  import 'tui-editor/dist/tui-editor-contents.css'
-  import 'highlight.js/styles/github.css'
+  import Editor from './components/Editor'
 
   export default {
+    components: {
+      Editor
+    },
+
     data () {
       return {
-        editor: null,
         list: {
           drafts: [],
           posts: []
@@ -51,32 +54,64 @@
       }
     },
 
-    async created () {
-      const posts = await this.$api.getPosts()
-      this.list = posts
-    },
-
-    mounted () {
-      this.editor = new Editor({
-        el: this.$refs.editor,
-        initialEditType: 'markdown',
-        previewStyle: 'vertical',
-        height: '300px'
-      })
+    created () {
+      this.fetchData()
     },
 
     methods: {
+      async fetchData () {
+        const posts = await this.$api.getPosts()
+        this.list = posts
+      },
+
       setActivePost (post) {
-        console.log(post)
         this.activePost = post
-        this.editor.setValue(post._content)
-        setTimeout(() => {
-          const $images = this.$refs.editor.querySelectorAll('img')
-          $images.forEach($img => {
-            console.log($img)
-            $img.src = `/${post.path}${$img.src.replace(`http://${location.host}/admin/`, '')}`
+      },
+
+      async handleOpen (post) {
+        await this.$api.openPostAsset(post.asset_dir)
+      },
+
+      handleAdd () {
+        this.activePost = {}
+      },
+
+      async handleRemove () {
+        const { full_source } = this.activePost
+
+        await this.$api.removePost(full_source)
+        this.fetchData()
+        this.$vs.notify({
+          title: 'Info',
+          text: 'Done'
+        })
+      },
+
+      async handleSave () {
+        const { _id, title, full_source, raw } = this.activePost
+
+        if (!title) {
+          this.$vs.notify({
+            title: 'Error',
+            text: 'Invalid title',
+            color: 'danger'
           })
-        }, 1000)
+          return
+        }
+
+        if (_id) {
+          // update
+          await this.$api.updatePost(full_source, raw)
+        } else {
+          // create
+          const { path } = await this.$api.addPost(title)
+          await this.$api.updatePost(path, raw)
+        }
+        this.fetchData()
+        this.$vs.notify({
+          title: 'Info',
+          text: 'Done'
+        })
       }
     }
   }
@@ -84,5 +119,30 @@
 
 <style scoped lang="scss">
   .posts {
+    height: 100%;
+  }
+
+  .tool {
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div {
+      button {
+        margin-left: 12px;
+      }
+    }
+  }
+
+  .container {
+    height: calc(100% - 64px);
+    display: flex;
+  }
+
+  .list {
+    width: 320px;
+    margin-bottom: 0;
+    overflow: auto;
   }
 </style>

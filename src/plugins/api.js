@@ -7,6 +7,10 @@ const axios = Axios.create({
 axios.interceptors.response.use((resp) => resp.data)
 
 const api = {
+  getConfigs () {
+    return axios.get('/configs')
+  },
+
   getPosts () {
     return axios.get('/posts/list')
   },
