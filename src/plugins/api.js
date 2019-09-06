@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 const axios = Axios.create({
-  baseURL: 'http://localhost:4000/admin/api'
+  baseURL: `${window.location.origin}/admin/api`
 })
 
 axios.interceptors.response.use((resp) => resp.data)
@@ -28,7 +28,6 @@ const api = {
   },
 
   removePost (source) {
-    console.log(source)
     return axios.post('/posts/remove', { source })
   }
 }

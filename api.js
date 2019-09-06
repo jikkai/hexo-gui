@@ -1,12 +1,11 @@
 const { exec } = require('child_process')
 const fs = require('fs-extra')
 const moment = require('moment')
+const jsyaml = require('js-yaml')
 
 const api = {}
 
 api.create = (hexo, app) => {
-  hexo.browsersync.exit()
-
   // ==========================================
   // 创建 api 路由
   // ==========================================
@@ -77,7 +76,12 @@ api.create = (hexo, app) => {
   })
 
   createRouter('/configs', (req, res) => {
-    res.done(hexo.config)
+    const themeConfig = fs.readFileSync(`${hexo.theme.base}_config.yml`)
+
+    res.done({
+      theme: jsyaml.safeLoad(themeConfig),
+      global: hexo.config
+    })
   })
 }
 

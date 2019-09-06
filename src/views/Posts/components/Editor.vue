@@ -1,16 +1,30 @@
 <template>
-  <vs-card class="editor">
-    <section class="meta">
-      <vs-input v-model="meta.title" placeholder="Title" @change="handleChangeInput" />
-      <vs-input v-model="meta.date" placeholder="Date" @change="handleChangeInput" />
-      <vs-input v-model="meta.categories" placeholder="Categories" @change="handleChangeInput" />
-      <vs-input v-model="meta.tags" placeholder="Tags" @change="handleChangeInput" />
-    </section>
+  <md-card class="editor">
+    <md-card-content>
+      <section class="meta">
+        <md-field>
+          <label>Title</label>
+          <md-input v-model="meta.title" @change="handleChangeInput" />
+        </md-field>
+        <md-field>
+          <label>Date</label>
+          <md-input v-model="meta.date" @change="handleChangeInput" />
+        </md-field>
+        <md-field>
+          <label>Categories</label>
+          <md-input v-model="meta.categories" @change="handleChangeInput" />
+        </md-field>
+        <md-field>
+          <label>Tags</label>
+          <md-input v-model="meta.tags" @change="handleChangeInput" />
+        </md-field>
+      </section>
 
-    <section class="container">
-      <div ref="editor" />
-    </section>
-  </vs-card>
+      <section class="container">
+        <div ref="editor" />
+      </section>
+    </md-card-content>
+  </md-card>
 </template>
 
 <script>
@@ -42,7 +56,7 @@
           $images && $images.forEach($img => {
             $img.src = `${HOST}/${path}${$img.src.replace(`${HOST}/admin/`, '')}`
           })
-        }, 100)
+        }, 1000)
       }
     },
 
@@ -111,17 +125,13 @@
     margin-bottom: 0;
     flex: 1;
 
-    .con-vs-card {
-      height: 100%;
-    }
-
-    ::v-deep .vs-card--content {
+    ::v-deep .md-card-content {
       height: 100%;
     }
   }
 
   .meta {
-    height: 160px;
+    height: 300px;
     padding-bottom: 10px;
     display: flex;
     flex-direction: column;
@@ -133,6 +143,6 @@
   }
 
   .container {
-    height: calc(100% - 160px);
+    height: calc(100% - 300px);
   }
 </style>
