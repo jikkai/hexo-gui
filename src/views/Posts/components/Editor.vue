@@ -1,28 +1,34 @@
 <template>
   <md-card class="editor">
-    <md-card-content>
-      <section class="meta">
-        <md-field>
-          <label>Title</label>
-          <md-input v-model="meta.title" @change="handleChangeInput" />
-        </md-field>
-        <md-field>
-          <label>Date</label>
-          <md-input v-model="meta.date" @change="handleChangeInput" />
-        </md-field>
-        <md-field>
-          <label>Categories</label>
-          <md-input v-model="meta.categories" @change="handleChangeInput" />
-        </md-field>
-        <md-field>
-          <label>Tags</label>
-          <md-input v-model="meta.tags" @change="handleChangeInput" />
-        </md-field>
-      </section>
+    <md-card-content ref="content">
+      <md-tabs class="md-primary">
+        <md-tab id="tab-meta" md-label="Meta">
+          <section class="meta">
+            <md-field>
+              <label>Title</label>
+              <md-input v-model="meta.title" @change="handleChangeInput" />
+            </md-field>
+            <md-field>
+              <label>Date</label>
+              <md-input v-model="meta.date" @change="handleChangeInput" />
+            </md-field>
+            <md-field>
+              <label>Categories</label>
+              <md-input v-model="meta.categories" @change="handleChangeInput" />
+            </md-field>
+            <md-field>
+              <label>Tags</label>
+              <md-input v-model="meta.tags" @change="handleChangeInput" />
+            </md-field>
+          </section>
+        </md-tab>
 
-      <section class="container">
-        <div ref="editor" />
-      </section>
+        <md-tab id="tab-editor" md-label="Editor">
+          <section class="container">
+            <div ref="editor" />
+          </section>
+        </md-tab>
+      </md-tabs>
     </md-card-content>
   </md-card>
 </template>
@@ -65,12 +71,15 @@
         el: this.$refs.editor,
         initialEditType: 'markdown',
         previewStyle: 'vertical',
-        height: '100%',
+        height: this.$refs.content.$el.offsetHeight - 96,
         hideModeSwitch: true,
         exts: ['scrollSync']
       })
 
       this.editor.on('change', this.handleChangeInput)
+      window.onresize = () => {
+        this.editor.height(this.$refs.content.$el.offsetHeight - 96)
+      }
     },
 
     computed: {
@@ -131,8 +140,6 @@
   }
 
   .meta {
-    height: 300px;
-    padding-bottom: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -140,9 +147,5 @@
     .vs-input {
       width: 100%;
     }
-  }
-
-  .container {
-    height: calc(100% - 300px);
   }
 </style>
