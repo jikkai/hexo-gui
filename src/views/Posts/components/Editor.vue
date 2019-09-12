@@ -89,8 +89,8 @@
         return {
           title,
           date: this.$date.format(date),
-          tags: tags.toString(),
-          categories: categories.toString(),
+          tags: tags.join(', '),
+          categories: categories.join(', '),
           _content
         }
       }
@@ -106,7 +106,7 @@
         }\ndate: ${
           date
         }\ntags: [${
-          tags
+          tags.join(', ')
         }]\ncategories: ${
           categories
         }\n---\n${
