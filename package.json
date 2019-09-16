@@ -1,13 +1,14 @@
 {
   "name": "hexo-gui",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-alpha.4",
   "description": "An admin plugin for hexo",
   "author": "Jikkai Xiao <sonne@asaki.me>",
   "scripts": {
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "prepublishOnly": "npm i && npm run build",
-    "start": "vue-cli-service build --watch"
+    "start": "vue-cli-service build --watch",
+    "watch": "sync-files --watch dist"
   },
   "main": "index.js",
   "dependencies": {
@@ -30,10 +31,11 @@
     "@vue/cli-service": "^3.11.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^6.3.0",
+    "eslint": "^6.4.0",
     "eslint-plugin-vue": "^5.0.0",
-    "sass": "^1.18.0",
+    "sass": "^1.22.12",
     "sass-loader": "^8.0.0",
+    "sync-files": "^1.0.3",
     "vue-cli-plugin-axios": "0.0.4",
     "vue-template-compiler": "^2.6.10"
   },

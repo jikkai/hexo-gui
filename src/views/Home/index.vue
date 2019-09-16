@@ -61,46 +61,46 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        baseUrl: window.location.origin,
-        configs: {
-          global: {},
-          theme: {}
-        },
-        posts: {
-          drafts: [],
-          posts: []
-        }
-      }
-    },
-
-    created () {
-      this.fetchData()
-    },
-
-    methods: {
-      async fetchData () {
-        this.configs = await this.$api.getConfigs()
-        this.posts = await this.$api.getPosts()
+export default {
+  data () {
+    return {
+      baseUrl: window.location.origin,
+      configs: {
+        global: {},
+        theme: {}
+      },
+      posts: {
+        drafts: [],
+        posts: []
       }
     }
+  },
+
+  created () {
+    this.fetchData()
+  },
+
+  methods: {
+    async fetchData () {
+      this.configs = await this.$api.getConfigs()
+      this.posts = await this.$api.getPosts()
+    }
   }
+}
 </script>
 
 <style lang="scss" scoped>
+.md-card {
+  margin: 0;
+}
+
+.container {
+  margin: 24px 0;
+  display: flex;
+  justify-content: space-between;
+
   .md-card {
-    margin: 0;
+    width: 30%;
   }
-
-  .container {
-    margin: 24px 0;
-    display: flex;
-    justify-content: space-between;
-
-    .md-card {
-      width: 30%;
-    }
-  }
+}
 </style>

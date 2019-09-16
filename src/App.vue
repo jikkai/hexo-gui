@@ -60,31 +60,31 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .md-app {
-    height: 100vh;
-  }
+.md-app {
+  height: 100vh;
+}
 
-   // Demo purposes only
-  .md-drawer {
-    width: 230px;
-    max-width: calc(100vw - 125px);
-  }
-  .layout {
-    height: 100vh;
+  // Demo purposes only
+.md-drawer {
+  width: 230px;
+  max-width: calc(100vw - 125px);
+}
+.layout {
+  height: 100vh;
 
-    .container {
-      height: calc(100% - 48px);
-      display: flex;
+  .container {
+    height: calc(100% - 48px);
+    display: flex;
 
-      .main {
-        position: relative;
-        height: 100%;
-        padding: 24px;
-        flex: 1;
-        background: #f5f7fb;
-        overflow: auto;
-        z-index: 1;
-      }
+    .main {
+      position: relative;
+      height: 100%;
+      padding: 24px;
+      flex: 1;
+      background: #f5f7fb;
+      overflow: auto;
+      z-index: 1;
     }
   }
+}
 </style>

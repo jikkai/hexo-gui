@@ -70,122 +70,122 @@
 </template>
 
 <script>
-  import Editor from './components/Editor'
+import Editor from './components/Editor'
 
-  export default {
-    components: {
-      Editor
+export default {
+  components: {
+    Editor
+  },
+
+  data () {
+    return {
+      snackbar: {
+        visible: false,
+        text: ''
+      },
+      posts: {
+        drafts: [],
+        posts: []
+      },
+      activePost: {}
+    }
+  },
+
+  created () {
+    this.fetchData()
+  },
+
+  methods: {
+    async fetchData () {
+      this.posts = await this.$api.getPosts()
     },
 
-    data () {
-      return {
-        snackbar: {
-          visible: false,
-          text: ''
-        },
-        posts: {
-          drafts: [],
-          posts: []
-        },
-        activePost: {}
+    setActivePost (post) {
+      this.activePost = post
+    },
+
+    async handleOpen (post) {
+      await this.$api.openPostAsset(post.asset_dir)
+    },
+
+    handleAdd () {
+      this.activePost = {}
+    },
+
+    async handleRemove () {
+      const { full_source } = this.activePost
+
+      await this.$api.removePost(full_source)
+      this.fetchData()
+      this.snackbar = {
+        visible: true,
+        text: 'Done'
       }
     },
 
-    created () {
-      this.fetchData()
-    },
+    async handleSave () {
+      const { _id, title, full_source, raw } = this.activePost
 
-    methods: {
-      async fetchData () {
-        this.posts = await this.$api.getPosts()
-      },
-
-      setActivePost (post) {
-        this.activePost = post
-      },
-
-      async handleOpen (post) {
-        await this.$api.openPostAsset(post.asset_dir)
-      },
-
-      handleAdd () {
-        this.activePost = {}
-      },
-
-      async handleRemove () {
-        const { full_source } = this.activePost
-
-        await this.$api.removePost(full_source)
-        this.fetchData()
+      if (!title) {
         this.snackbar = {
           visible: true,
-          text: 'Done'
+          text: 'nvalid title'
         }
-      },
+        return
+      }
 
-      async handleSave () {
-        const { _id, title, full_source, raw } = this.activePost
-
-        if (!title) {
-          this.snackbar = {
-            visible: true,
-            text: 'nvalid title'
-          }
-          return
-        }
-
-        if (_id) {
-          // update
-          await this.$api.updatePost(full_source, raw)
-        } else {
-          // create
-          const { path } = await this.$api.addPost(title)
-          await this.$api.updatePost(path, raw)
-        }
-        this.snackbar = {
-          visible: true,
-          text: 'Done'
-        }
+      if (_id) {
+        // update
+        await this.$api.updatePost(full_source, raw)
+      } else {
+        // create
+        const { path } = await this.$api.addPost(title)
+        await this.$api.updatePost(path, raw)
+      }
+      this.snackbar = {
+        visible: true,
+        text: 'Done'
       }
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
-  .posts {
+.posts {
+  height: 100%;
+
+  .md-button {
+    margin: 0;
+  }
+}
+
+.tool {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  height: calc(100% - 64px);
+  display: flex;
+  justify-content: space-between;
+
+  .md-card {
     height: 100%;
-
-    .md-button {
-      margin: 0;
-    }
+    margin: 0;
+    overflow: auto;
   }
 
-  .tool {
-    width: 100%;
-    height: 64px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .list {
+    width: 360px;
   }
 
-  .container {
-    width: 100%;
-    height: calc(100% - 64px);
-    display: flex;
-    justify-content: space-between;
-
-    .md-card {
-      height: 100%;
-      margin: 0;
-      overflow: auto;
-    }
-
-    .list {
-      width: 360px;
-    }
-
-    .content {
-      width: calc(100% - 360px);
-    }
+  .content {
+    width: calc(100% - 360px);
   }
+}
 </style>

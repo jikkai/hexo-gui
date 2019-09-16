@@ -5,20 +5,20 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-      }
-    },
-
-    created () {
-      this.fetchData()
-    },
-
-    methods: {
-      fetchData () {}
+export default {
+  data () {
+    return {
     }
+  },
+
+  created () {
+    this.fetchData()
+  },
+
+  methods: {
+    fetchData () {}
   }
+}
 </script>
 
 <style lang="scss" scoped>
